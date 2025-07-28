@@ -332,7 +332,7 @@ const Index = () => {
       <div className="bg-white border-b px-4 py-4">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-xl font-bold">Vietnam Payment Hub</h1>
+            <h1 className="text-xl font-bold">Olive</h1>
             <p className="text-sm text-muted-foreground">Good morning, User!</p>
           </div>
           <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
