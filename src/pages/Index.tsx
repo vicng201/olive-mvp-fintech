@@ -15,6 +15,7 @@ import {
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
 
   const wallets = [
     { name: "VietinBank", balance: "2,450,000 VND", color: "bg-blue-500" },
@@ -25,12 +26,23 @@ const Index = () => {
   ];
 
   const loyaltyCards = [
-    { name: "Circle K", points: "1,245", tier: "Gold", color: "bg-red-600" },
-    { name: "7-Eleven", points: "892", tier: "Silver", color: "bg-orange-600" },
-    { name: "Highlands Coffee", points: "567", tier: "Bronze", color: "bg-brown-600" },
-    { name: "Lotte Mart", points: "2,341", tier: "Platinum", color: "bg-blue-600" },
-    { name: "Vinmart", points: "445", tier: "Silver", color: "bg-green-600" },
+    { name: "Circle K", points: "1,245", tier: "Gold", color: "bg-red-600", expiry: "Dec 2024", offers: "20% off coffee", cashback: "5%" },
+    { name: "7-Eleven", points: "892", tier: "Silver", color: "bg-orange-600", expiry: "Jan 2025", offers: "Buy 2 Get 1 Free", cashback: "3%" },
+    { name: "Highlands Coffee", points: "567", tier: "Bronze", color: "bg-brown-600", expiry: "Nov 2024", offers: "Free pastry", cashback: "4%" },
+    { name: "Lotte Mart", points: "2,341", tier: "Platinum", color: "bg-blue-600", expiry: "Mar 2025", offers: "10% store discount", cashback: "6%" },
+    { name: "Vinmart", points: "445", tier: "Silver", color: "bg-green-600", expiry: "Feb 2025", offers: "Free delivery", cashback: "3%" },
+    { name: "The Coffee House", points: "723", tier: "Gold", color: "bg-amber-600", expiry: "Jan 2025", offers: "Happy hour 50%", cashback: "4%" },
   ];
+
+  const toggleCardFlip = (index: number) => {
+    const newFlippedCards = new Set(flippedCards);
+    if (newFlippedCards.has(index)) {
+      newFlippedCards.delete(index);
+    } else {
+      newFlippedCards.add(index);
+    }
+    setFlippedCards(newFlippedCards);
+  };
 
   const renderHomeTab = () => (
     <div className="space-y-6">
@@ -83,28 +95,54 @@ const Index = () => {
             <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>
-        <div className="space-y-3">
-          {loyaltyCards.slice(0, 3).map((card, index) => (
-            <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-10 h-10 rounded-lg ${card.color} flex items-center justify-center`}>
-                      <Star className="w-5 h-5 text-white" />
+        <div className="grid grid-cols-3 gap-3">
+          {loyaltyCards.slice(0, 6).map((card, index) => (
+            <div 
+              key={index} 
+              className="relative h-32 cursor-pointer"
+              style={{ perspective: "1000px" }}
+              onClick={() => toggleCardFlip(index)}
+            >
+              <div 
+                className={`relative w-full h-full transition-transform duration-500 preserve-3d ${
+                  flippedCards.has(index) ? "rotate-y-180" : ""
+                }`}
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                {/* Front of card */}
+                <Card className="absolute inset-0 backface-hidden border-0 shadow-md">
+                  <CardContent className="p-3 h-full flex flex-col justify-between">
+                    <div className={`w-8 h-8 rounded-lg ${card.color} flex items-center justify-center`}>
+                      <Star className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <p className="font-medium text-sm">{card.name}</p>
-                      <p className="text-xs text-muted-foreground">{card.points} points • {card.tier}</p>
+                      <p className="font-medium text-xs mb-1">{card.name}</p>
+                      <p className="text-xs text-muted-foreground">{card.points} pts</p>
+                      <Badge variant="secondary" className="text-xs px-1 py-0 mt-1">
+                        {card.tier}
+                      </Badge>
                     </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Button size="sm" variant="outline" className="text-xs px-2 py-1 h-7">
-                      Scan
+                  </CardContent>
+                </Card>
+                
+                {/* Back of card */}
+                <Card className="absolute inset-0 backface-hidden rotate-y-180 border-0 shadow-md bg-gradient-to-br from-gray-50 to-gray-100">
+                  <CardContent className="p-3 h-full flex flex-col justify-between text-xs">
+                    <div>
+                      <p className="font-medium text-xs mb-2">{card.name}</p>
+                      <div className="space-y-1">
+                        <p className="text-xs"><span className="font-medium">Offer:</span> {card.offers}</p>
+                        <p className="text-xs"><span className="font-medium">Cashback:</span> {card.cashback}</p>
+                        <p className="text-xs"><span className="font-medium">Expires:</span> {card.expiry}</p>
+                      </div>
+                    </div>
+                    <Button size="sm" className="h-6 text-xs">
+                      Use Now
                     </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
