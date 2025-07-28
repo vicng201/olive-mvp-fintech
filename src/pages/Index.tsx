@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/components/ui/use-toast";
 import { 
   Home, 
   CreditCard, 
@@ -10,12 +11,17 @@ import {
   Scan,
   Plus,
   ChevronRight,
-  Star
+  Star,
+  QrCode
 } from "lucide-react";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
+  const [showQrCode, setShowQrCode] = useState(false);
+  const [scanningCard, setScanningCard] = useState<string | null>(null);
+  const [totalPoints, setTotalPoints] = useState(5489);
+  const { toast } = useToast();
 
   const wallets = [
     { name: "VietinBank", balance: "2,450,000 VND", color: "bg-blue-500" },
@@ -44,11 +50,34 @@ const Index = () => {
     setFlippedCards(newFlippedCards);
   };
 
+  const handleScan = (cardName: string) => {
+    setScanningCard(cardName);
+    setShowQrCode(true);
+    
+    // Simulate scanning process
+    setTimeout(() => {
+      setShowQrCode(false);
+      setScanningCard(null);
+      setTotalPoints(prev => prev + 10);
+      toast({
+        title: "Scan Successful!",
+        description: `${cardName}: +10 points added to your rewards`,
+      });
+    }, 3000);
+  };
+
   const renderHomeTab = () => (
     <div className="space-y-6">
       {/* Balance Card */}
       <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
         <CardContent className="p-6">
+          <div className="flex justify-between items-start mb-4">
+            <h3 className="text-white text-lg font-semibold">My Balance</h3>
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
+              <Plus className="w-4 h-4 mr-1" />
+              Open Physical Card
+            </Button>
+          </div>
           <div className="flex justify-between items-start">
             <div>
               <p className="text-blue-100 text-sm">Total Balance</p>
@@ -171,6 +200,20 @@ const Index = () => {
         </Button>
       </div>
       
+      {showQrCode && (
+        <Card className="border-2 border-dashed border-primary">
+          <CardContent className="p-6 text-center">
+            <div className="flex flex-col items-center space-y-4">
+              <QrCode className="w-32 h-32 text-primary animate-pulse" />
+              <div>
+                <p className="font-semibold">Scanning {scanningCard}...</p>
+                <p className="text-sm text-muted-foreground">Hold your phone steady</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+      
       {loyaltyCards.map((card, index) => (
         <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
           <CardContent className="p-4">
@@ -185,7 +228,14 @@ const Index = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <Button size="sm" variant="outline">Scan</Button>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => handleScan(card.name)}
+                  disabled={showQrCode}
+                >
+                  Scan
+                </Button>
                 <Button size="sm">Redeem</Button>
               </div>
             </div>
@@ -233,8 +283,8 @@ const Index = () => {
         <CardContent className="p-6">
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-2">Available Points</h3>
-            <p className="text-3xl font-bold">5,489</p>
-            <p className="text-green-100 text-sm mt-1">≈ 54,890 VND value</p>
+            <p className="text-3xl font-bold">{totalPoints.toLocaleString()}</p>
+            <p className="text-green-100 text-sm mt-1">≈ {(totalPoints * 10).toLocaleString()} VND value</p>
           </div>
         </CardContent>
       </Card>
