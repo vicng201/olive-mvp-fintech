@@ -74,6 +74,41 @@ const Index = () => {
         </div>
       </div>
 
+      {/* My Loyalty Cards */}
+      <div>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold">My Loyalty Cards</h3>
+          <Button variant="ghost" size="sm" onClick={() => setActiveTab("loyalty")}>
+            View All
+            <ChevronRight className="w-4 h-4 ml-1" />
+          </Button>
+        </div>
+        <div className="space-y-3">
+          {loyaltyCards.slice(0, 3).map((card, index) => (
+            <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-10 h-10 rounded-lg ${card.color} flex items-center justify-center`}>
+                      <Star className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">{card.name}</p>
+                      <p className="text-xs text-muted-foreground">{card.points} points • {card.tier}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Button size="sm" variant="outline" className="text-xs px-2 py-1 h-7">
+                      Scan
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
       {/* Quick Actions */}
       <div className="grid grid-cols-2 gap-4">
         <Button className="h-16 flex-col space-y-1">
