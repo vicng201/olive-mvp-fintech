@@ -138,9 +138,9 @@ const Index = () => {
       <div>
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">My Wallets</h3>
-          <Button variant="ghost" size="sm">
-            <Plus className="w-4 h-4 mr-1" />
-            Add
+          <Button variant="ghost" size="sm" onClick={() => setActiveTab("wallets")}>
+            View All
+            <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>
         <div className="flex space-x-3 overflow-x-auto pb-2">
