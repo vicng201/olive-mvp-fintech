@@ -290,35 +290,47 @@ const Index = () => {
             <p className="text-sm text-muted-foreground">+480,000 VND this month</p>
           </div>
           
-          <div className="h-36 mb-2">
-            <ChartContainer config={chartConfig}>
-              <LineChart 
-                data={wealthHistory} 
-                width={350} 
-                height={144}
-                margin={{ top: 8, right: 8, left: 8, bottom: 20 }}
+          {/* Chart container with proper clipping and containment */}
+          <div className="h-40 overflow-hidden relative border border-border/5 rounded-lg bg-card/50">
+            <ChartContainer config={chartConfig} className="w-full h-full">
+              <ResponsiveContainer 
+                width="100%" 
+                height="100%"
+                minHeight={160}
               >
-                <XAxis 
-                  dataKey="date" 
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{ fontSize: 10, dy: 5 }}
-                  height={18}
-                />
-                <YAxis hide />
-                <ChartTooltip
-                  content={<ChartTooltipContent />}
-                  formatter={(value) => [`${Number(value).toLocaleString()} VND`, "Total Wealth"]}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="amount" 
-                  stroke="hsl(var(--primary))" 
-                  strokeWidth={2}
-                  dot={{ fill: "hsl(var(--primary))", strokeWidth: 2, r: 4 }}
-                  activeDot={{ r: 6, stroke: "hsl(var(--primary))", strokeWidth: 2 }}
-                />
-              </LineChart>
+                <LineChart 
+                  data={wealthHistory} 
+                  margin={{ top: 12, right: 16, left: 16, bottom: 24 }}
+                >
+                  <defs>
+                    <clipPath id="chart-clip">
+                      <rect x="0" y="0" width="100%" height="100%" />
+                    </clipPath>
+                  </defs>
+                  <XAxis 
+                    dataKey="date" 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }}
+                    height={20}
+                    interval="preserveStartEnd"
+                  />
+                  <YAxis hide />
+                  <ChartTooltip
+                    content={<ChartTooltipContent />}
+                    formatter={(value) => [`${Number(value).toLocaleString()} VND`, "Total Wealth"]}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="amount" 
+                    stroke="hsl(var(--primary))" 
+                    strokeWidth={2}
+                    dot={{ fill: "hsl(var(--primary))", strokeWidth: 2, r: 3 }}
+                    activeDot={{ r: 5, stroke: "hsl(var(--primary))", strokeWidth: 2 }}
+                    clipPath="url(#chart-clip)"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </ChartContainer>
           </div>
         </CardContent>
