@@ -101,7 +101,7 @@ const Index = () => {
       <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
         <CardContent className="p-6">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-white text-lg font-semibold">My Olive Cashback Balance</h3>
+            <h3 className="text-white text-lg font-semibold">My Olive Points</h3>
           </div>
           <div className="flex justify-between items-start">
             <div>
