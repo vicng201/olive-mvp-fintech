@@ -122,6 +122,22 @@ const Index = () => {
         </CardContent>
       </Card>
 
+      {/* Quick Actions */}
+      <div className="grid grid-cols-2 gap-4">
+        <Button className="h-16 flex-col space-y-1" onClick={() => setActiveTab("loyalty")}>
+          <Star className="w-6 h-6" />
+          <span className="text-sm">Earn Points</span>
+        </Button>
+        <Button 
+          variant="outline" 
+          className="h-16 flex-col space-y-1 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-200 hover:from-green-500/20 hover:to-emerald-500/20 hover:border-green-300" 
+          onClick={() => navigate("/cashout")}
+        >
+          <Wallet className="w-6 h-6 text-green-600" />
+          <span className="text-sm text-green-700 font-medium">Cash Out</span>
+        </Button>
+      </div>
+
       {/* Top Wallets */}
       <div>
         <div className="flex justify-between items-center mb-4">
@@ -205,21 +221,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="grid grid-cols-2 gap-4">
-        <Button className="h-16 flex-col space-y-1" onClick={() => setActiveTab("loyalty")}>
-          <Star className="w-6 h-6" />
-          <span className="text-sm">Earn Points</span>
-        </Button>
-        <Button 
-          variant="outline" 
-          className="h-16 flex-col space-y-1 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-200 hover:from-green-500/20 hover:to-emerald-500/20 hover:border-green-300" 
-          onClick={() => navigate("/cashout")}
-        >
-          <Wallet className="w-6 h-6 text-green-600" />
-          <span className="text-sm text-green-700 font-medium">Cash Out</span>
-        </Button>
-      </div>
     </div>
   );
 
