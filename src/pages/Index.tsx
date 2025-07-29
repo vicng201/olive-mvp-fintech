@@ -293,12 +293,13 @@ const Index = () => {
           <div className="h-48">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={wealthHistory}>
+                <LineChart data={wealthHistory} margin={{ top: 5, right: 5, left: 5, bottom: 25 }}>
                   <XAxis 
                     dataKey="date" 
                     axisLine={false}
                     tickLine={false}
                     tick={{ fontSize: 12 }}
+                    height={20}
                   />
                   <YAxis hide />
                   <ChartTooltip 
