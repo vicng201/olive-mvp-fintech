@@ -290,19 +290,19 @@ const Index = () => {
             <p className="text-sm text-muted-foreground">+480,000 VND this month</p>
           </div>
           
-          <div className="h-48">
+          <div className="h-40">
             <ChartContainer config={chartConfig}>
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={wealthHistory} margin={{ top: 5, right: 5, left: 5, bottom: 15 }}>
+                <LineChart data={wealthHistory} margin={{ top: 5, right: 5, left: 5, bottom: 10 }}>
                   <XAxis 
                     dataKey="date" 
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fontSize: 12 }}
-                    height={15}
+                    tick={{ fontSize: 11 }}
+                    height={12}
                   />
                   <YAxis hide />
-                  <ChartTooltip 
+                  <ChartTooltip
                     content={<ChartTooltipContent />}
                     formatter={(value) => [`${Number(value).toLocaleString()} VND`, "Total Wealth"]}
                   />
