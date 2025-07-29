@@ -400,7 +400,7 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground">Track spending & set limits</p>
               </div>
             </div>
-            <Button size="sm" variant="outline" className="border-orange-200 text-orange-700 hover:bg-orange-100">
+            <Button size="sm" variant="outline" className="border-orange-200 text-orange-700 hover:bg-orange-100" onClick={() => setActiveTab("analytics")}>
               Try Beta
             </Button>
           </div>
