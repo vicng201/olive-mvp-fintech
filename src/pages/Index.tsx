@@ -130,11 +130,11 @@ const Index = () => {
         </Button>
         <Button 
           variant="outline" 
-          className="h-16 flex-col space-y-1 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-200 hover:from-green-500/20 hover:to-emerald-500/20 hover:border-green-300" 
+          className="h-16 flex-col space-y-1 bg-black/5 border-black/20 hover:bg-black/10 hover:border-black/30" 
           onClick={() => navigate("/cashout")}
         >
-          <Wallet className="w-6 h-6 text-green-600" />
-          <span className="text-sm text-green-700 font-medium">Cash Out</span>
+          <Wallet className="w-6 h-6 text-black" />
+          <span className="text-sm text-black font-medium">Cash Out</span>
         </Button>
       </div>
 
