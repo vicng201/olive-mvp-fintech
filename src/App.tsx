@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import WalletDetail from "./pages/WalletDetail";
 import VoucherMerchants from "./pages/VoucherMerchants";
 import VoucherOffers from "./pages/VoucherOffers";
+import CashOut from "./pages/CashOut";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/wallet/:bankName" element={<WalletDetail />} />
           <Route path="/vouchers" element={<VoucherMerchants />} />
           <Route path="/vouchers/:merchantId" element={<VoucherOffers />} />
+          <Route path="/cashout" element={<CashOut />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
