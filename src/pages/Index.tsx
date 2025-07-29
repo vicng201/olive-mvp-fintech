@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +22,7 @@ import {
 } from "lucide-react";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("home");
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [showQrCode, setShowQrCode] = useState(false);
@@ -416,7 +418,11 @@ const Index = () => {
         
         <div className="grid grid-cols-3 gap-3">
           {wallets.map((wallet, index) => (
-            <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
+            <Card 
+              key={index} 
+              className="cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => navigate(`/wallet/${wallet.name}`)}
+            >
               <CardContent className="p-3">
                 <div className="space-y-2">
                   <div className={`w-8 h-8 rounded-lg ${wallet.color} mx-auto`}></div>
