@@ -305,9 +305,8 @@ const Index = () => {
                   onClick={() => handleScan(card.name)}
                   disabled={showQrCode}
                 >
-                  Scan
+                  Scan to earn points
                 </Button>
-                <Button size="sm">Redeem</Button>
               </div>
             </div>
           </CardContent>
