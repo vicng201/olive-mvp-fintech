@@ -290,36 +290,42 @@ const Index = () => {
             <p className="text-sm text-muted-foreground">+480,000 VND this month</p>
           </div>
           
-          <div className="h-40">
+          <div className="h-36 mb-2">
             <ChartContainer config={chartConfig}>
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={wealthHistory} margin={{ top: 5, right: 5, left: 5, bottom: 10 }}>
-                  <XAxis 
-                    dataKey="date" 
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 11 }}
-                    height={12}
-                  />
-                  <YAxis hide />
-                  <ChartTooltip
-                    content={<ChartTooltipContent />}
-                    formatter={(value) => [`${Number(value).toLocaleString()} VND`, "Total Wealth"]}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="amount" 
-                    stroke="hsl(var(--primary))" 
-                    strokeWidth={2}
-                    dot={{ fill: "hsl(var(--primary))", strokeWidth: 2, r: 4 }}
-                    activeDot={{ r: 6, stroke: "hsl(var(--primary))", strokeWidth: 2 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+              <LineChart 
+                data={wealthHistory} 
+                width={350} 
+                height={144}
+                margin={{ top: 8, right: 8, left: 8, bottom: 20 }}
+              >
+                <XAxis 
+                  dataKey="date" 
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 10, dy: 5 }}
+                  height={18}
+                />
+                <YAxis hide />
+                <ChartTooltip
+                  content={<ChartTooltipContent />}
+                  formatter={(value) => [`${Number(value).toLocaleString()} VND`, "Total Wealth"]}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="amount" 
+                  stroke="hsl(var(--primary))" 
+                  strokeWidth={2}
+                  dot={{ fill: "hsl(var(--primary))", strokeWidth: 2, r: 4 }}
+                  activeDot={{ r: 6, stroke: "hsl(var(--primary))", strokeWidth: 2 }}
+                />
+              </LineChart>
             </ChartContainer>
           </div>
         </CardContent>
       </Card>
+
+      {/* Spacing buffer between sections */}
+      <div className="h-4"></div>
 
       {/* Budget Management - Beta Feature */}
       <Card className="border-dashed border-2 border-orange-200 bg-orange-50/50">
