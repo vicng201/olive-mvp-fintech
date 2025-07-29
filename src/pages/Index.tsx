@@ -236,7 +236,10 @@ const Index = () => {
       <div>
         <h3 className="text-lg font-semibold mb-4">Redeem Rewards</h3>
         <div className="grid grid-cols-2 gap-4">
-          <Card className="cursor-pointer hover:shadow-md transition-shadow">
+          <Card 
+            className="cursor-pointer hover:shadow-md transition-shadow"
+            onClick={() => navigate("/vouchers")}
+          >
             <CardContent className="p-4 text-center">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
                 <Gift className="w-6 h-6 text-blue-600" />
