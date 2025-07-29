@@ -207,9 +207,9 @@ const Index = () => {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-2 gap-4">
-        <Button className="h-16 flex-col space-y-1">
-          <Scan className="w-6 h-6" />
-          <span className="text-sm">Scan & Pay</span>
+        <Button className="h-16 flex-col space-y-1" onClick={() => setActiveTab("loyalty")}>
+          <Star className="w-6 h-6" />
+          <span className="text-sm">Earn Points</span>
         </Button>
         <Button variant="outline" className="h-16 flex-col space-y-1">
           <CreditCard className="w-6 h-6" />
