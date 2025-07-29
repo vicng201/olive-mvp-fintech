@@ -115,7 +115,7 @@ const Index = () => {
             </div>
             <div className="text-right">
               <Badge variant="secondary" className="bg-white/20 text-white">
-                Cashback: 2.5%
+                1 point = 10 VND
               </Badge>
             </div>
           </div>
