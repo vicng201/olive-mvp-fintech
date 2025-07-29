@@ -365,7 +365,7 @@ const Index = () => {
                   <div className="text-center">
                     <p className="font-medium text-xs">{wallet.name}</p>
                     <p className="text-xs text-muted-foreground mt-1">
-                      {(wallet.balance / 1000).toFixed(0)}K
+                      {wallet.displayBalance}
                     </p>
                   </div>
                 </div>
