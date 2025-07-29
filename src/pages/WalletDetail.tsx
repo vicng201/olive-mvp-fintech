@@ -13,23 +13,23 @@ const WalletDetail = () => {
     VietinBank: {
       bankName: "VietinBank",
       cardNumber: "**** **** **** 2468",
-      balance: 15420000,
+      balance: 2450000,
       cardType: "Debit Card",
-      gradient: "from-red-500 to-red-600"
+      gradient: "from-blue-500 to-blue-600"
     },
     Techcombank: {
       bankName: "Techcombank",
       cardNumber: "**** **** **** 1357",
-      balance: 8750000,
+      balance: 1280000,
       cardType: "Credit Card", 
-      gradient: "from-green-500 to-green-600"
+      gradient: "from-red-500 to-red-600"
     },
     BIDV: {
       bankName: "BIDV",
       cardNumber: "**** **** **** 9876",
-      balance: 3200000,
+      balance: 890000,
       cardType: "Debit Card",
-      gradient: "from-blue-500 to-blue-600"
+      gradient: "from-green-500 to-green-600"
     }
   };
 
