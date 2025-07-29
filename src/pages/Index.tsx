@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import { 
   Home, 
   CreditCard, 
@@ -12,7 +14,10 @@ import {
   Plus,
   ChevronRight,
   Star,
-  QrCode
+  QrCode,
+  TrendingUp,
+  TrendingDown,
+  Settings
 } from "lucide-react";
 
 const Index = () => {
@@ -24,12 +29,33 @@ const Index = () => {
   const { toast } = useToast();
 
   const wallets = [
-    { name: "VietinBank", balance: "2,450,000 VND", color: "bg-blue-500" },
-    { name: "Techcombank", balance: "1,280,000 VND", color: "bg-red-500" },
-    { name: "BIDV", balance: "890,000 VND", color: "bg-green-500" },
-    { name: "MB Bank", balance: "650,000 VND", color: "bg-purple-500" },
-    { name: "ACB", balance: "420,000 VND", color: "bg-orange-500" },
+    { name: "VietinBank", balance: 2450000, displayBalance: "2,450,000 VND", color: "bg-blue-500" },
+    { name: "Techcombank", balance: 1280000, displayBalance: "1,280,000 VND", color: "bg-red-500" },
+    { name: "BIDV", balance: 890000, displayBalance: "890,000 VND", color: "bg-green-500" },
+    { name: "MB Bank", balance: 650000, displayBalance: "650,000 VND", color: "bg-purple-500" },
+    { name: "ACB", balance: 420000, displayBalance: "420,000 VND", color: "bg-orange-500" },
+    { name: "Sacombank", balance: 320000, displayBalance: "320,000 VND", color: "bg-teal-500" },
   ];
+
+  // Calculate total wealth
+  const totalWealth = wallets.reduce((sum, wallet) => sum + wallet.balance, 0);
+
+  // Mock wealth history data for the chart
+  const wealthHistory = [
+    { date: "Jan", amount: 5200000 },
+    { date: "Feb", amount: 5450000 },
+    { date: "Mar", amount: 5320000 },
+    { date: "Apr", amount: 5680000 },
+    { date: "May", amount: 5890000 },
+    { date: "Jun", amount: 6010000 },
+  ];
+
+  const chartConfig = {
+    amount: {
+      label: "Total Wealth",
+      color: "hsl(var(--primary))",
+    },
+  };
 
   const loyaltyCards = [
     { name: "Circle K", points: "1,245", tier: "Gold", color: "bg-red-600", expiry: "Dec 2024", offers: "20% off coffee", cashback: "5%" },
@@ -108,7 +134,7 @@ const Index = () => {
               <CardContent className="p-4">
                 <div className={`w-8 h-8 rounded-lg ${wallet.color} mb-2`}></div>
                 <p className="font-medium text-sm">{wallet.name}</p>
-                <p className="text-xs text-muted-foreground">{wallet.balance}</p>
+                <p className="text-xs text-muted-foreground">{wallet.displayBalance}</p>
               </CardContent>
             </Card>
           ))}
@@ -246,34 +272,107 @@ const Index = () => {
   );
 
   const renderWalletsTab = () => (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold">All Wallets</h3>
-        <Button variant="ghost" size="sm">
-          <Plus className="w-4 h-4 mr-1" />
-          Link Wallet
-        </Button>
-      </div>
-      
-      {wallets.map((wallet, index) => (
-        <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className={`w-12 h-12 rounded-lg ${wallet.color}`}></div>
-                <div>
-                  <p className="font-medium">{wallet.name}</p>
-                  <p className="text-sm text-muted-foreground">{wallet.balance}</p>
-                </div>
+    <div className="space-y-6">
+      {/* Wealth Analytics */}
+      <Card>
+        <CardHeader className="pb-2">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg">Total Wealth</CardTitle>
+            <div className="flex items-center text-green-600">
+              <TrendingUp className="w-4 h-4 mr-1" />
+              <span className="text-sm font-medium">+8.2%</span>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <p className="text-2xl font-bold">{totalWealth.toLocaleString()} VND</p>
+            <p className="text-sm text-muted-foreground">+480,000 VND this month</p>
+          </div>
+          
+          <div className="h-48">
+            <ChartContainer config={chartConfig}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={wealthHistory}>
+                  <XAxis 
+                    dataKey="date" 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fontSize: 12 }}
+                  />
+                  <YAxis hide />
+                  <ChartTooltip 
+                    content={<ChartTooltipContent />}
+                    formatter={(value) => [`${Number(value).toLocaleString()} VND`, "Total Wealth"]}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="amount" 
+                    stroke="hsl(var(--primary))" 
+                    strokeWidth={2}
+                    dot={{ fill: "hsl(var(--primary))", strokeWidth: 2, r: 4 }}
+                    activeDot={{ r: 6, stroke: "hsl(var(--primary))", strokeWidth: 2 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </ChartContainer>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Budget Management - Beta Feature */}
+      <Card className="border-dashed border-2 border-orange-200 bg-orange-50/50">
+        <CardContent className="p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                <Settings className="w-5 h-5 text-orange-600" />
               </div>
-              <div className="flex items-center space-x-2">
-                <Button size="sm" variant="outline">Top Up</Button>
-                <ChevronRight className="w-4 h-4 text-muted-foreground" />
+              <div>
+                <div className="flex items-center space-x-2">
+                  <p className="font-medium">Budget Management</p>
+                  <Badge variant="secondary" className="bg-orange-100 text-orange-700 text-xs">
+                    BETA
+                  </Badge>
+                </div>
+                <p className="text-sm text-muted-foreground">Track spending & set limits</p>
               </div>
             </div>
-          </CardContent>
-        </Card>
-      ))}
+            <Button size="sm" variant="outline" className="border-orange-200 text-orange-700 hover:bg-orange-100">
+              Try Beta
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Wallet Grid - 3x2 Layout */}
+      <div>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold">My Wallets</h3>
+          <Button variant="ghost" size="sm">
+            <Plus className="w-4 h-4 mr-1" />
+            Link Wallet
+          </Button>
+        </div>
+        
+        <div className="grid grid-cols-3 gap-3">
+          {wallets.map((wallet, index) => (
+            <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
+              <CardContent className="p-3">
+                <div className="space-y-2">
+                  <div className={`w-8 h-8 rounded-lg ${wallet.color} mx-auto`}></div>
+                  <div className="text-center">
+                    <p className="font-medium text-xs">{wallet.name}</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {(wallet.balance / 1000).toFixed(0)}K
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
     </div>
   );
 
