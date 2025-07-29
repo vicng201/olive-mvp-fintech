@@ -18,7 +18,8 @@ import {
   QrCode,
   TrendingUp,
   TrendingDown,
-  Settings
+  Settings,
+  BarChart3
 } from "lucide-react";
 
 const Index = () => {
@@ -441,20 +442,20 @@ const Index = () => {
     </div>
   );
 
-  const renderRewardsTab = () => (
+  const renderAnalyticsTab = () => (
     <div className="space-y-6">
       <Card>
         <CardContent className="p-6 text-center">
           <div className="space-y-4">
             <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto">
-              <Gift className="w-8 h-8 text-muted-foreground" />
+              <BarChart3 className="w-8 h-8 text-muted-foreground" />
             </div>
             <div>
               <h3 className="text-lg font-semibold mb-2">Coming Soon</h3>
-              <p className="text-sm text-muted-foreground">More reward features are being developed. For now, you can access all points and redemption options in the Loyalty tab.</p>
+              <p className="text-sm text-muted-foreground">More analytics features are being developed. For now, you can access total wealth and recent transaction in the Wallet tab.</p>
             </div>
-            <Button onClick={() => setActiveTab("loyalty")}>
-              Go to Loyalty
+            <Button onClick={() => setActiveTab("wallets")}>
+              Go to Wallets
             </Button>
           </div>
         </CardContent>
@@ -467,7 +468,7 @@ const Index = () => {
       case "home": return renderHomeTab();
       case "loyalty": return renderLoyaltyTab();
       case "wallets": return renderWalletsTab();
-      case "rewards": return renderRewardsTab();
+      case "analytics": return renderAnalyticsTab();
       default: return renderHomeTab();
     }
   };
@@ -497,7 +498,7 @@ const Index = () => {
             { id: "home", icon: Home, label: "Home" },
             { id: "loyalty", icon: CreditCard, label: "Loyalty" },
             { id: "wallets", icon: Wallet, label: "Wallets" },
-            { id: "rewards", icon: Gift, label: "Rewards" },
+            { id: "analytics", icon: BarChart3, label: "Analytics" },
           ].map((tab) => (
             <button
               key={tab.id}
