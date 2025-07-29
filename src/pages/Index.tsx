@@ -217,14 +217,53 @@ const Index = () => {
   );
 
   const renderLoyaltyTab = () => (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-semibold">Loyalty Cards</h3>
-        <Button variant="ghost" size="sm">
-          <Plus className="w-4 h-4 mr-1" />
-          Add Card
-        </Button>
+    <div className="space-y-6">
+      {/* Available Points Card */}
+      <Card className="bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0">
+        <CardContent className="p-6">
+          <div className="text-center">
+            <h3 className="text-lg font-semibold mb-2">Available Points</h3>
+            <p className="text-3xl font-bold">{totalPoints.toLocaleString()}</p>
+            <p className="text-green-100 text-sm mt-1">≈ {(totalPoints * 10).toLocaleString()} VND value</p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Redeem Rewards Section */}
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Redeem Rewards</h3>
+        <div className="grid grid-cols-2 gap-4">
+          <Card className="cursor-pointer hover:shadow-md transition-shadow">
+            <CardContent className="p-4 text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <Gift className="w-6 h-6 text-blue-600" />
+              </div>
+              <p className="font-medium text-sm">Vouchers</p>
+              <p className="text-xs text-muted-foreground">50+ available</p>
+            </CardContent>
+          </Card>
+          
+          <Card className="cursor-pointer hover:shadow-md transition-shadow">
+            <CardContent className="p-4 text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <CreditCard className="w-6 h-6 text-green-600" />
+              </div>
+              <p className="font-medium text-sm">Cashback</p>
+              <p className="text-xs text-muted-foreground">Direct to wallet</p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
+
+      {/* Loyalty Cards Section */}
+      <div>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold">My Loyalty Cards</h3>
+          <Button variant="ghost" size="sm">
+            <Plus className="w-4 h-4 mr-1" />
+            Add Card
+          </Button>
+        </div>
       
       {showQrCode && (
         <Card className="border-2 border-dashed border-primary">
@@ -239,8 +278,8 @@ const Index = () => {
           </CardContent>
         </Card>
       )}
-      
-      {loyaltyCards.map((card, index) => (
+        
+        {loyaltyCards.map((card, index) => (
         <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
@@ -267,7 +306,8 @@ const Index = () => {
             </div>
           </CardContent>
         </Card>
-      ))}
+        ))}
+      </div>
     </div>
   );
 
@@ -397,40 +437,22 @@ const Index = () => {
 
   const renderRewardsTab = () => (
     <div className="space-y-6">
-      <Card className="bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0">
-        <CardContent className="p-6">
-          <div className="text-center">
-            <h3 className="text-lg font-semibold mb-2">Available Points</h3>
-            <p className="text-3xl font-bold">{totalPoints.toLocaleString()}</p>
-            <p className="text-green-100 text-sm mt-1">≈ {(totalPoints * 10).toLocaleString()} VND value</p>
+      <Card>
+        <CardContent className="p-6 text-center">
+          <div className="space-y-4">
+            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto">
+              <Gift className="w-8 h-8 text-muted-foreground" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Coming Soon</h3>
+              <p className="text-sm text-muted-foreground">More reward features are being developed. For now, you can access all points and redemption options in the Loyalty tab.</p>
+            </div>
+            <Button onClick={() => setActiveTab("loyalty")}>
+              Go to Loyalty
+            </Button>
           </div>
         </CardContent>
       </Card>
-
-      <div>
-        <h3 className="text-lg font-semibold mb-4">Redeem Rewards</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <Card className="cursor-pointer hover:shadow-md transition-shadow">
-            <CardContent className="p-4 text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                <Gift className="w-6 h-6 text-blue-600" />
-              </div>
-              <p className="font-medium text-sm">Vouchers</p>
-              <p className="text-xs text-muted-foreground">50+ available</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="cursor-pointer hover:shadow-md transition-shadow">
-            <CardContent className="p-4 text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                <CreditCard className="w-6 h-6 text-green-600" />
-              </div>
-              <p className="font-medium text-sm">Cashback</p>
-              <p className="text-xs text-muted-foreground">Direct to wallet</p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
     </div>
   );
 
