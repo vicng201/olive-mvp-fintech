@@ -254,15 +254,6 @@ const Index = () => {
             </CardContent>
           </Card>
           
-          <Card className="cursor-pointer hover:shadow-md transition-shadow">
-            <CardContent className="p-4 text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                <CreditCard className="w-6 h-6 text-green-600" />
-              </div>
-              <p className="font-medium text-sm">Cashback</p>
-              <p className="text-xs text-muted-foreground">Direct to wallet</p>
-            </CardContent>
-          </Card>
         </div>
       </div>
 
