@@ -106,7 +106,8 @@ const Index = () => {
           <div className="flex justify-between items-start">
             <div>
               <p className="text-blue-100 text-sm">Total Balance</p>
-              <h2 className="text-2xl font-bold">{(totalPoints * 10).toLocaleString()} VND = {totalPoints.toLocaleString()} points</h2>
+              <h2 className="text-2xl font-bold">{totalPoints.toLocaleString()} points</h2>
+              <p className="text-blue-100 text-lg">{(totalPoints * 10).toLocaleString()} VND</p>
               <p className="text-blue-100 text-sm mt-1">+245 points today</p>
             </div>
             <div className="text-right">
