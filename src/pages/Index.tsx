@@ -214,4 +214,253 @@ const Index = () => {
                     </div>
                   </div>
                   <p className={`font-medium text-sm ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                    {transaction.amount >
+                    {transaction.amount > 0 ? '+' : ''}{transaction.amount.toLocaleString()} VND
+                  </p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+
+  const renderWalletsTab = () => (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-4">
+        {wallets.map((wallet, index) => (
+          <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-10 h-10 rounded-lg ${wallet.color} flex items-center justify-center`}>
+                    <CreditCard className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-sm">{wallet.name}</h3>
+                    <p className="text-xs text-muted-foreground">Balance</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-bold text-sm">{wallet.displayBalance}</p>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 px-2 text-xs"
+                    onClick={() => navigate("/wallet-detail", { state: { wallet } })}
+                  >
+                    View Details
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+
+  const renderLoyaltyTab = () => (
+    <div className="space-y-6">
+      {/* Scanning Animation */}
+      {showQrCode && (
+        <Card className="bg-black text-white border-0">
+          <CardContent className="p-8 text-center">
+            <div className="animate-pulse">
+              <QrCode className="w-24 h-24 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Scanning {scanningCard}...</h3>
+              <p className="text-gray-300">Present this QR code to earn points</p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <div className="grid grid-cols-1 gap-4">
+        {loyaltyCards.map((card, index) => (
+          <div
+            key={index}
+            className="relative w-full h-40 perspective-1000"
+            onClick={() => toggleCardFlip(index)}
+          >
+            <div
+              className={`relative w-full h-full transition-transform duration-700 transform-style-preserve-3d ${
+                flippedCards.has(index) ? 'rotate-y-180' : ''
+              }`}
+            >
+              {/* Front of Card */}
+              <Card className={`absolute inset-0 w-full h-full ${card.color} text-white cursor-pointer backface-hidden`}>
+                <CardContent className="p-4 h-full flex flex-col justify-between">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-lg font-bold">{card.name}</h3>
+                    <Badge variant="secondary" className="bg-white/20 text-white">
+                      {card.tier}
+                    </Badge>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold">{card.points} pts</p>
+                    <p className="text-sm opacity-90">Expires: {card.expiry}</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Back of Card */}
+              <Card className={`absolute inset-0 w-full h-full ${card.color} text-white cursor-pointer backface-hidden rotate-y-180`}>
+                <CardContent className="p-4 h-full flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-semibold mb-2">Current Offer</h4>
+                    <p className="text-sm mb-3">{card.offers}</p>
+                    <p className="text-sm">Cashback: {card.cashback}</p>
+                  </div>
+                  <Button
+                    variant="secondary"
+                    className="w-full bg-white/20 hover:bg-white/30 text-white border-white/20"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleScan(card.name);
+                    }}
+                  >
+                    <Scan className="w-4 h-4 mr-2" />
+                    Scan to Earn
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 mt-6">
+        <Button variant="outline" onClick={() => navigate("/voucher-offers")}>
+          <Gift className="w-4 h-4 mr-2" />
+          View Offers
+        </Button>
+        <Button variant="outline" onClick={() => navigate("/voucher-merchants")}>
+          <ChevronRight className="w-4 h-4 mr-2" />
+          All Merchants
+        </Button>
+      </div>
+    </div>
+  );
+
+  const renderOlivePointsTab = () => (
+    <div className="space-y-6">
+      {/* Total Wealth Container */}
+      <Card className="bg-gradient-to-r from-green-600 to-blue-600 text-white border-0">
+        <CardContent className="p-6">
+          <div className="flex justify-between items-start mb-4">
+            <h3 className="text-white text-lg font-semibold">Total Wealth</h3>
+            <Badge variant="secondary" className="bg-white/20 text-white">
+              All Accounts
+            </Badge>
+          </div>
+          <div className="flex justify-between items-end">
+            <div>
+              <h2 className="text-3xl font-bold mb-1">
+                {totalWealth.toLocaleString()} VND
+              </h2>
+              <div className="flex items-center space-x-2">
+                <TrendingUp className="w-4 h-4 text-green-200" />
+                <span className="text-green-200 text-sm">+5.2% this month</span>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Wealth History Chart */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <BarChart3 className="w-5 h-5 mr-2" />
+            Wealth Growth
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig} className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={wealthHistory}>
+                <XAxis 
+                  dataKey="date" 
+                  tick={{ fontSize: 12 }}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <YAxis hide />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Line 
+                  type="monotone" 
+                  dataKey="amount" 
+                  stroke="hsl(var(--primary))" 
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-background pb-20">
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm border-b p-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-bold">Olive Wallet</h1>
+          <Button variant="ghost" size="sm">
+            <Settings className="w-5 h-5" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-4">
+        {activeTab === "home" && renderHomeTab()}
+        {activeTab === "wallets" && renderWalletsTab()}
+        {activeTab === "loyalty" && renderLoyaltyTab()}
+        {activeTab === "olivepoints" && renderOlivePointsTab()}
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t">
+        <div className="grid grid-cols-4 gap-1">
+          <Button
+            variant={activeTab === "home" ? "default" : "ghost"}
+            className="h-16 flex-col space-y-1 rounded-none"
+            onClick={() => setActiveTab("home")}
+          >
+            <Home className="w-5 h-5" />
+            <span className="text-xs">Home</span>
+          </Button>
+          <Button
+            variant={activeTab === "wallets" ? "default" : "ghost"}
+            className="h-16 flex-col space-y-1 rounded-none"
+            onClick={() => setActiveTab("wallets")}
+          >
+            <Wallet className="w-5 h-5" />
+            <span className="text-xs">Wallets</span>
+          </Button>
+          <Button
+            variant={activeTab === "loyalty" ? "default" : "ghost"}
+            className="h-16 flex-col space-y-1 rounded-none"
+            onClick={() => setActiveTab("loyalty")}
+          >
+            <Star className="w-5 h-5" />
+            <span className="text-xs">Rewards</span>
+          </Button>
+          <Button
+            variant={activeTab === "olivepoints" ? "default" : "ghost"}
+            className="h-16 flex-col space-y-1 rounded-none"
+            onClick={() => setActiveTab("olivepoints")}
+          >
+            <BarChart3 className="w-5 h-5" />
+            <span className="text-xs">OlivePoints</span>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Index;
