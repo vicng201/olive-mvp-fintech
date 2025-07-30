@@ -1,6 +1,6 @@
-# Olive – Unified Financial & Loyalty Platform for Vietnam 🇻🇳💸
+# Olive – Unified Personal Financial Management & Loyalty Platform, Vietnam Market
 
-Olive is a modern MVP web application built to streamline personal finance, loyalty points, and voucher redemption for Vietnamese users. It supports multi-bank account integration, point tracking, voucher marketplaces, and cash-out features.
+Olive is a modern MVP web application built to streamline personal finance, loyalty points, and voucher redemption for Vietnamese users. It supports multi-bank account integration, loyalty point earning and tracking, voucher marketplaces, and cash-out features.
 
 ## 📦 Project info
 This project was made with [Lovable](https://lovable.dev), a platform for building and deploying web applications with minimal coding.
@@ -122,6 +122,23 @@ Finance, Technology, Web App, Mobile App, Rewards, Payments, Points System, Bank
 ## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ---
 
