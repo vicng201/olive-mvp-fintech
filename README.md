@@ -5,7 +5,7 @@ Olive is a modern MVP web application built to streamline personal finance, loya
 ## 📦 Project info
 This project was made with [Lovable](https://lovable.dev), a platform for building and deploying web applications with minimal coding.
 
-**🔗 DEMO URL**: https://lovable.dev/projects/0cf81d0d-8ccc-4abe-ab2a-5c038e991d74
+**🔗 DEMO URL**: [https://lovable.dev/projects/0cf81d0d-8ccc-4abe-ab2a-5c038e991d74](https://olive-mvp-fintech.lovable.app/)
 
 ## 🚀 Main Features
 
@@ -113,6 +113,11 @@ Current Deployment Strategy:
 - *Lovable Platform* - Automated deployment through Lovable's infrastructure
 - *Staging URL*: https://lovable.dev/projects/0cf81d0d-8ccc-4abe-ab2a-5c038e991d74
 - *Production Deployment*: One-click publish through Lovable interface
+
+  
+## 📚 Keywords
+
+Finance, Technology, Web App, Mobile App, Rewards, Payments, Points System, Banking, User Experience, Digital Wallet, Personal Finance App, Loyalty Program, Financial App, Web Development, Software Project, Startup MVP, Modern UI, Cloud Deployment, Financial Innovation, App Prototype, Customer Engagement, FinTech Startup, MVP Demo, Tech for Good, Emerging Markets, Digital Innovation
 
 ## 📄 License
 
