@@ -1,73 +1,125 @@
-# Welcome to your Lovable project
+# Olive – Unified Financial & Loyalty Platform for Vietnam 🇻🇳💸
 
-## Project info
+Olive is a modern MVP web application built to streamline personal finance, loyalty points, and voucher redemption for Vietnamese users. It supports multi-bank account integration, point tracking, voucher marketplaces, and cash-out features.
 
-**URL**: https://lovable.dev/projects/0cf81d0d-8ccc-4abe-ab2a-5c038e991d74
+## 📦 Project info
+This project was made with [Lovable](https://lovable.dev), a platform for building and deploying web applications with minimal coding.
 
-## How can I edit this code?
+**🔗 DEMO URL**: https://lovable.dev/projects/0cf81d0d-8ccc-4abe-ab2a-5c038e991d74
 
-There are several ways of editing your application.
+## 🚀 Main Features
 
-**Use Lovable**
+**Core Features:**
+- 🔐 Multi-wallet support (mock integration with Vietnamese banks)
+- 💳 Scan and store loyalty cards (e.g., Circle K, 7-Eleven)
+- 💰 Olive Points (1 point = 10 VND)
+- 🎟️ Voucher marketplace for redemption
+- 🔁 Cash out points via mock bank transfer
+- 📈 Financial analytics and transaction tracking
+- 📷 QR code scanner for point earning
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0cf81d0d-8ccc-4abe-ab2a-5c038e991d74) and start prompting.
+**Specialized Features:**
+- 🏦 Multi-bank integration (top 10 Vietnamese banks)
+- 🇻🇳 Vietnamese market focus (VND, local merchants)
+- ⏱️ Real-time balance tracking
+- 🎮 Gamified point earning via merchant partnerships
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🛠️ Getting started
 
-**Use your preferred IDE**
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/olive-mvp-fintech.git
+   cd olive-mvp-fintech
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
-Follow these steps:
+4. **Open the app**
+   - Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+> 🧑‍💻 The backend is mocked for MVP purposes. All data and API responses are simulated via [`src/lib/mockBackend.ts`](src/lib/mockBackend.ts).
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+For deployment, see the [Deployment](#deployment) section.
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+## 🏗️ Architecture
+This project is frontend-focused, with the backend and database functionality simulated using a mock implementation. The mock backend is defined in [src/lib/mockBackend.ts](src/lib/mockBackend.ts), providing placeholder data and simulating API responses to support the application's features for the MVP.
+### 📁 Project structure:
 ```
+olive-mvp-fintech/
+├── public/                # Static assets (favicon, robots.txt, etc)
+├── src/
+│   ├── App.tsx            # Main app component and router
+│   ├── main.tsx           # App entry point
+│   ├── index.css          # Global styles and Tailwind config
+│   ├── App.css            # App-specific styles
+│   ├── components/
+│   │   └── ui/            # Reusable UI components (card, button, chart, etc)
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Utilities and mock backend
+│   └── pages/             # Main app pages (Index, WalletDetail, Vouchers, CashOut, etc)
+├── package.json           # Project metadata and scripts
+├── tailwind.config.ts     # Tailwind CSS configuration
+├── vite.config.ts         # Vite build configuration
+├── tsconfig.json          # TypeScript configuration
+├── README.md              # Project documentation
+```
+### 📄 Pages Details
 
-**Edit a file directly in GitHub**
+The `src/pages/` directory contains the main application pages, each serving a specific purpose:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- **`Index.tsx`**  🏠
+  The main dashboard displaying:  
+  - 🪙 Summary of Olive points  
+  - 📃 Recent transactions  
+  - 👛 Wallet overview  
+  - 🗂️ Navigation tabs  
 
-**Use GitHub Codespaces**
+- **`WalletDetail.tsx`**  👛
+  Detailed view for a selected bank wallet, including:  
+  - 📃 Transaction history  
+  - 💵 Balance information  
+  - 🔁 Cash-out options  
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **`VoucherMerchants.tsx`**  🏪
+  A list of merchants where users can redeem points for vouchers.  
 
-## What technologies are used for this project?
+- **`VoucherOffers.tsx`**  🎁
+  Displays voucher offers from a selected merchant, with actions for redemption.  
 
-This project is built with:
+- **`CashOut.tsx`**  💸
+  Allows users to convert Olive points to VND and transfer them to a linked bank account.  
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **`NotFound.tsx`**  🚫
+  A 404 error page displayed for invalid routes.  
 
-## How can I deploy this project?
+### 🧑‍💻 Project technologies:
+- ⚡ Vite: Fast build tool for frontend development
+- 🟦 TypeScript: Enhanced JavaScript with static typing
+- ⚛️ React: UI library for building user interfaces
+- 🧩 shadcn-ui: UI components
+- 🎨 Tailwind CSS: Utility-first CSS framework
 
-Simply open [Lovable](https://lovable.dev/projects/0cf81d0d-8ccc-4abe-ab2a-5c038e991d74) and click on Share -> Publish.
+## 🚢 Deployment
 
-## Can I connect a custom domain to my Lovable project?
+Current Deployment Strategy:
+- *Lovable Platform* - Automated deployment through Lovable's infrastructure
+- *Staging URL*: https://lovable.dev/projects/0cf81d0d-8ccc-4abe-ab2a-5c038e991d74
+- *Production Deployment*: One-click publish through Lovable interface
 
-Yes, you can!
+## 📄 License
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
+
+© 2025 Olive Fintech. All rights reserved.
+
+
