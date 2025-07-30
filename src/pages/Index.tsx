@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ComposedChart, Bar } from "recharts";
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Home, 
@@ -30,6 +30,7 @@ const Index = () => {
   const [showQrCode, setShowQrCode] = useState(false);
   const [scanningCard, setScanningCard] = useState<string | null>(null);
   const [totalPoints, setTotalPoints] = useState(5489);
+  const [selectedPeriod, setSelectedPeriod] = useState("weekly");
   const { toast } = useToast();
 
   const wallets = [
@@ -123,16 +124,59 @@ const Index = () => {
     }
   ];
 
-  // Mock data for Points Analytics Tab
-  const pointsHistory = [
-    { date: "Mon", earned: 120, redeemed: 80, cashout: 50 },
-    { date: "Tue", earned: 150, redeemed: 60, cashout: 30 },
-    { date: "Wed", earned: 200, redeemed: 100, cashout: 70 },
-    { date: "Thu", earned: 180, redeemed: 90, cashout: 40 },
-    { date: "Fri", earned: 220, redeemed: 110, cashout: 80 },
-    { date: "Sat", earned: 160, redeemed: 70, cashout: 60 },
-    { date: "Sun", earned: 140, redeemed: 85, cashout: 45 },
-  ];
+  // Generate chart data based on selected period
+  const generateChartData = (period: string) => {
+    switch (period) {
+      case "daily":
+        return [
+          { date: "12am", pointsIn: 20, pointsOut: 15 },
+          { date: "6am", pointsIn: 35, pointsOut: 10 },
+          { date: "12pm", pointsIn: 80, pointsOut: 45 },
+          { date: "6pm", pointsIn: 90, pointsOut: 60 },
+        ];
+      case "weekly":
+        return [
+          { date: "Mon", pointsIn: 120, pointsOut: 130 },
+          { date: "Tue", pointsIn: 150, pointsOut: 90 },
+          { date: "Wed", pointsIn: 200, pointsOut: 170 },
+          { date: "Thu", pointsIn: 180, pointsOut: 130 },
+          { date: "Fri", pointsIn: 220, pointsOut: 190 },
+          { date: "Sat", pointsIn: 160, pointsOut: 130 },
+          { date: "Sun", pointsIn: 140, pointsOut: 130 },
+        ];
+      case "monthly":
+        return [
+          { date: "Week 1", pointsIn: 890, pointsOut: 650 },
+          { date: "Week 2", pointsIn: 1120, pointsOut: 780 },
+          { date: "Week 3", pointsIn: 950, pointsOut: 690 },
+          { date: "Week 4", pointsIn: 1200, pointsOut: 920 },
+        ];
+      case "quarterly":
+        return [
+          { date: "Jan", pointsIn: 4200, pointsOut: 3100 },
+          { date: "Feb", pointsIn: 3800, pointsOut: 2900 },
+          { date: "Mar", pointsIn: 4500, pointsOut: 3400 },
+        ];
+      case "yearly":
+        return [
+          { date: "2022", pointsIn: 42000, pointsOut: 38000 },
+          { date: "2023", pointsIn: 48000, pointsOut: 41000 },
+          { date: "2024", pointsIn: 52000, pointsOut: 45000 },
+        ];
+      default:
+        return [
+          { date: "Mon", pointsIn: 120, pointsOut: 130 },
+          { date: "Tue", pointsIn: 150, pointsOut: 90 },
+          { date: "Wed", pointsIn: 200, pointsOut: 170 },
+          { date: "Thu", pointsIn: 180, pointsOut: 130 },
+          { date: "Fri", pointsIn: 220, pointsOut: 190 },
+          { date: "Sat", pointsIn: 160, pointsOut: 130 },
+          { date: "Sun", pointsIn: 140, pointsOut: 130 },
+        ];
+    }
+  };
+
+  const chartData = generateChartData(selectedPeriod);
 
   const recentPointActivities = [
     { merchant: "Circle K", action: "Purchase scan", points: 25, date: "2 hours ago" },
@@ -617,7 +661,7 @@ const Index = () => {
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <p className="text-blue-100 text-sm">Points Activity</p>
-              <Select defaultValue="weekly">
+              <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
                 <SelectTrigger className="w-20 h-8 bg-white/20 border-white/30 text-white text-xs">
                   <SelectValue />
                 </SelectTrigger>
@@ -631,19 +675,42 @@ const Index = () => {
               </Select>
             </div>
             
-            {/* Mini Chart */}
+            {/* Bar Chart */}
             <div className="h-32">
               <ChartContainer config={{
-                earned: { label: "Earned", color: "hsl(var(--primary))" },
-                redeemed: { label: "Redeemed", color: "hsl(var(--secondary))" },
-                cashout: { label: "Cash Out", color: "hsl(var(--accent))" }
+                pointsIn: { label: "Points In", color: "hsl(120, 60%, 50%)" },
+                pointsOut: { label: "Points Out", color: "hsl(0, 60%, 50%)" }
               }}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <ComposedChart data={pointsHistory}>
-                    <Bar dataKey="earned" fill="rgba(255,255,255,0.8)" radius={2} />
-                    <Line type="monotone" dataKey="redeemed" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
-                    <Line type="monotone" dataKey="cashout" stroke="rgba(255,255,255,0.4)" strokeWidth={2} />
-                  </ComposedChart>
+                  <BarChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+                    <XAxis 
+                      dataKey="date" 
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.8)' }}
+                      height={20}
+                    />
+                    <YAxis hide />
+                    <ChartTooltip
+                      content={<ChartTooltipContent />}
+                      formatter={(value, name) => [
+                        `${value} pts`, 
+                        name === "pointsIn" ? "Points Earned" : "Points Spent"
+                      ]}
+                    />
+                    <Bar 
+                      dataKey="pointsIn" 
+                      fill="hsl(120, 60%, 50%)" 
+                      radius={[2, 2, 0, 0]} 
+                      name="pointsIn"
+                    />
+                    <Bar 
+                      dataKey="pointsOut" 
+                      fill="hsl(0, 60%, 50%)" 
+                      radius={[2, 2, 0, 0]} 
+                      name="pointsOut"
+                    />
+                  </BarChart>
                 </ResponsiveContainer>
               </ChartContainer>
             </div>
