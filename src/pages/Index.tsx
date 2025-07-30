@@ -69,6 +69,59 @@ const Index = () => {
     { name: "The Coffee House", points: "723", tier: "Gold", color: "bg-amber-600", expiry: "Jan 2025", offers: "Happy hour 50%", cashback: "4%" },
   ];
 
+  // Mock recent transactions across all wallets
+  const recentTransactions = [
+    { 
+      description: "Coffee Shop Purchase", 
+      amount: -45000, 
+      date: "2h ago", 
+      walletName: "VietinBank", 
+      walletColor: "bg-blue-500" 
+    },
+    { 
+      description: "Salary Deposit", 
+      amount: 15000000, 
+      date: "1 day ago", 
+      walletName: "Techcombank", 
+      walletColor: "bg-red-500" 
+    },
+    { 
+      description: "Grocery Shopping", 
+      amount: -250000, 
+      date: "2 days ago", 
+      walletName: "BIDV", 
+      walletColor: "bg-green-500" 
+    },
+    { 
+      description: "Online Transfer", 
+      amount: -500000, 
+      date: "3 days ago", 
+      walletName: "VietinBank", 
+      walletColor: "bg-blue-500" 
+    },
+    { 
+      description: "Gas Station", 
+      amount: -120000, 
+      date: "4 days ago", 
+      walletName: "MB Bank", 
+      walletColor: "bg-purple-500" 
+    },
+    { 
+      description: "ATM Withdrawal", 
+      amount: -1000000, 
+      date: "5 days ago", 
+      walletName: "ACB", 
+      walletColor: "bg-orange-500" 
+    },
+    { 
+      description: "Restaurant Payment", 
+      amount: -180000, 
+      date: "6 days ago", 
+      walletName: "Sacombank", 
+      walletColor: "bg-teal-500" 
+    }
+  ];
+
   const toggleCardFlip = (index: number) => {
     const newFlippedCards = new Set(flippedCards);
     if (newFlippedCards.has(index)) {
@@ -134,7 +187,7 @@ const Index = () => {
         </Button>
       </div>
 
-      {/* Top Wallets */}
+      {/* My Wallets Section */}
       <div>
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">My Wallets</h3>
@@ -143,8 +196,26 @@ const Index = () => {
             <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>
-        <div className="flex space-x-3 overflow-x-auto pb-2">
-          {wallets.map((wallet, index) => (
+        
+        {/* Total Wealth Summary */}
+        <Card className="mb-4">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">Total Wealth</p>
+                <p className="text-xl font-bold">{totalWealth.toLocaleString()} VND</p>
+              </div>
+              <div className="flex items-center text-green-600">
+                <TrendingUp className="w-4 h-4 mr-1" />
+                <span className="text-sm font-medium">+8.2%</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Top 3 Wallets */}
+        <div className="flex space-x-3 overflow-x-auto pb-2 mb-4">
+          {wallets.slice(0, 3).map((wallet, index) => (
             <Card key={index} className="min-w-[160px] cursor-pointer hover:shadow-md transition-shadow">
               <CardContent className="p-4">
                 <div className={`w-8 h-8 rounded-lg ${wallet.color} mb-2`}></div>
@@ -154,6 +225,31 @@ const Index = () => {
             </Card>
           ))}
         </div>
+
+        {/* Recent Transactions */}
+        <Card>
+          <CardContent className="p-4">
+            <h4 className="font-medium text-sm mb-3">Recent Activity</h4>
+            <div className="space-y-3">
+              {recentTransactions.slice(0, 5).map((transaction, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-8 h-8 rounded-lg ${transaction.walletColor} flex items-center justify-center`}>
+                      <Wallet className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">{transaction.description}</p>
+                      <p className="text-xs text-muted-foreground">{transaction.walletName} • {transaction.date}</p>
+                    </div>
+                  </div>
+                  <p className={`font-medium text-sm ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    {transaction.amount > 0 ? '+' : ''}{transaction.amount.toLocaleString()} VND
+                  </p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* My Loyalty Cards */}
