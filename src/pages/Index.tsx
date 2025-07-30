@@ -588,7 +588,7 @@ const Index = () => {
               <p className="text-blue-100 text-sm">Total Balance</p>
               <h2 className="text-3xl font-bold">5,489 pts</h2>
               <p className="text-blue-100 text-sm">= 54,890 VND</p>
-              <p className="text-blue-100 text-sm mt-1">+245 pts today</p>
+              
             </div>
             <div className="text-right">
               <Badge variant="secondary" className="bg-white/20 text-white">
