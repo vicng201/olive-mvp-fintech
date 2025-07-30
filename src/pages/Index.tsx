@@ -180,19 +180,19 @@ const Index = () => {
         </Button>
         <Button 
           variant="secondary"
-          className="h-16 flex-col space-y-1 bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:from-orange-600 hover:to-pink-600" 
+          className="h-16 flex-col space-y-1 bg-black text-white hover:bg-black/80" 
           onClick={() => navigate("/vouchers")}
         >
           <Gift className="w-6 h-6" />
           <span className="text-sm">Redeem </span>
         </Button>
         <Button 
-          variant="outline" 
-          className="h-16 flex-col space-y-1 bg-black/5 border-black/20 hover:bg-black/10 hover:border-black/30" 
+          variant="secondary" 
+          className="h-16 flex-col space-y-1 bg-black text-white hover:bg-black/80" 
           onClick={() => navigate("/cashout")}
         >
-          <Wallet className="w-6 h-6 text-black" />
-          <span className="text-sm text-black font-medium">Cash Out</span>
+          <Wallet className="w-6 h-6 text-white" />
+          <span className="text-sm text-white font-medium">Cash Out</span>
         </Button>
       </div>
 
