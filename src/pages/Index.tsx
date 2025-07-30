@@ -321,10 +321,20 @@ const Index = () => {
       {/* Available Points Card */}
       <Card className="bg-gradient-to-r from-green-500 to-emerald-600 text-white border-0">
         <CardContent className="p-6">
-          <div className="text-center">
-            <h3 className="text-lg font-semibold mb-2">Available Points</h3>
-            <p className="text-3xl font-bold">{totalPoints.toLocaleString()}</p>
-            <p className="text-green-100 text-sm mt-1">≈ {(totalPoints * 10).toLocaleString()} VND value</p>
+          <div className="flex justify-between items-start mb-4">
+            <h3 className="text-white text-lg font-semibold">Available Points</h3>
+          </div>
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="text-green-100 text-sm">Total Balance</p>
+              <h2 className="text-2xl font-bold">{totalPoints.toLocaleString()} points</h2>
+              <p className="text-green-100 text-sm mt-1">≈ {(totalPoints * 10).toLocaleString()} VND value</p>
+            </div>
+            <div className="text-right">
+              <Badge variant="secondary" className="bg-white/20 text-white">
+                1 point = 10 VND
+              </Badge>
+            </div>
           </div>
         </CardContent>
       </Card>
