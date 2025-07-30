@@ -322,13 +322,13 @@ const Index = () => {
       <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
         <CardContent className="p-6">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-white text-lg font-semibold">Available Points</h3>
+            <h3 className="text-white text-lg font-semibold">My Olive Points</h3>
           </div>
           <div className="flex justify-between items-start">
             <div>
               <p className="text-blue-100 text-sm">Total Balance</p>
-              <h2 className="text-2xl font-bold">{totalPoints.toLocaleString()} points</h2>
-              <p className="text-blue-100 text-sm mt-1">≈ {(totalPoints * 10).toLocaleString()} VND value</p>
+              <h2 className="text-2xl font-bold">{totalPoints.toLocaleString()} points = {(totalPoints * 10).toLocaleString()} VND</h2>
+              <p className="text-blue-100 text-sm mt-1">+245 points today</p>
             </div>
             <div className="text-right">
               <Badge variant="secondary" className="bg-white/20 text-white">
