@@ -1,6 +1,17 @@
 # Olive – Unified Personal Financial Management & Loyalty Platform, Vietnam Market
 
 Olive is a modern MVP web application built to streamline personal finance, loyalty points, and voucher redemption for Vietnamese users. It supports multi-bank account integration, loyalty point earning and tracking, voucher marketplaces, and cash-out features.
+- **For Users**:  
+  - One-stop dashboard for balances, points, recent transactions & loyalty cards  
+  - Instant 20% points back on every top-up, plus 2–5 points per card scan  
+  - Redeem points for partner-specific vouchers (e.g. CGV, Vietnam Airlines) with 3-hour expiry  
+  - Data-driven “Today’s Suggestions” — top-3 merchants you visit most, and max redeemable value  
+  - Light, in-memory demo backend—no database required for rapid iteration
+
+- **For Merchants & Partners**:  
+  - Real-time analytics on aggregated transactions & redemptions  
+  - Push notifications to re-engage users on expiring points or new offers  
+  - Risk-free first-year integration (0 API fees) to drive customer acquisition & retention
 
 ## 📦 Project info
 This project was made with [Lovable](https://lovable.dev), a platform for building and deploying web applications with minimal coding.
