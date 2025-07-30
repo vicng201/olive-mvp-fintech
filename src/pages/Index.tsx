@@ -663,7 +663,6 @@ const Index = () => {
         
         <Card>
           <CardContent className="p-4 bg-gray-50/50">
-            <h4 className="font-medium text-sm mb-3">Recent Activity</h4>
             <div className="space-y-3">
               {recentPointActivities.slice(0, 3).map((activity, index) => (
                 <div key={index} className="flex items-center justify-between">
