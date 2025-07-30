@@ -172,10 +172,18 @@ const Index = () => {
       </Card>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <Button className="h-16 flex-col space-y-1" onClick={() => setActiveTab("loyalty")}>
           <Star className="w-6 h-6" />
           <span className="text-sm">Earn Points</span>
+        </Button>
+        <Button 
+          variant="secondary"
+          className="h-16 flex-col space-y-1 bg-gradient-to-r from-orange-500 to-pink-500 text-white hover:from-orange-600 hover:to-pink-600" 
+          onClick={() => navigate("/vouchers")}
+        >
+          <Gift className="w-6 h-6" />
+          <span className="text-sm">Redeem</span>
         </Button>
         <Button 
           variant="outline" 
