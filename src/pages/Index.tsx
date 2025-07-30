@@ -273,7 +273,7 @@ const Index = () => {
       <div className="grid grid-cols-3 gap-4">
         <Button className="h-16 flex-col space-y-1" onClick={() => setActiveTab("loyalty")}>
           <Star className="w-6 h-6" />
-          <span className="text-sm">Earn Points</span>
+          <span className="text-sm">Scan & Earn</span>
         </Button>
         <Button 
           variant="secondary"
