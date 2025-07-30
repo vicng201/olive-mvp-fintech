@@ -228,7 +228,7 @@ const Index = () => {
 
         {/* Recent Transactions */}
         <Card>
-          <CardContent className="p-4">
+          <CardContent className="p-4 bg-gray-50/50">
             <h4 className="font-medium text-sm mb-3">Recent Activity</h4>
             <div className="space-y-3">
               {recentTransactions.slice(0, 5).map((transaction, index) => (
