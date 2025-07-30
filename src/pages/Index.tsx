@@ -207,14 +207,14 @@ const Index = () => {
         </div>
         
         {/* Total Wealth Summary */}
-        <Card className="mb-4">
+        <Card className="mb-4 bg-gradient-to-r from-orange-500 to-pink-500 border-0">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Total Wealth</p>
-                <p className="text-xl font-bold">{totalWealth.toLocaleString()} VND</p>
+                <p className="text-sm text-orange-100">Total Wealth</p>
+                <p className="text-xl font-bold text-white">{totalWealth.toLocaleString()} VND</p>
               </div>
-              <div className="flex items-center text-green-600">
+              <div className="flex items-center text-green-200">
                 <TrendingUp className="w-4 h-4 mr-1" />
                 <span className="text-sm font-medium">+8.2%</span>
               </div>
