@@ -153,7 +153,7 @@ const Index = () => {
       {/* Balance Card */}
       <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
         <CardContent className="p-6">
-          <div className="flex justify-between items-start mb-4">
+          <div className="flex justify-between items-center mb-4">
             <h3 className="text-white text-lg font-semibold">My Olive Points</h3>
             <Button variant="ghost" size="sm" className="text-white hover:bg-white/20" onClick={() => setActiveTab("analytics")}>
               View All
