@@ -689,27 +689,24 @@ const Index = () => {
       <div>
         <h3 className="text-lg font-semibold mb-4">My Vouchers</h3>
         
-        <div className="space-y-3">
+        <div className="flex gap-3 overflow-x-auto pb-2">
           {activeVouchers.map((voucher, index) => (
-            <Card key={index} className="overflow-hidden bg-gradient-to-r from-gray-50 to-white border-l-4 border-l-primary">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg flex items-center justify-center">
-                    <span className="text-2xl">{voucher.logo}</span>
+            <Card key={index} className="min-w-[140px] w-[140px] h-[140px] flex-shrink-0 overflow-hidden bg-gradient-to-r from-gray-50 to-white border-l-4 border-l-primary">
+              <CardContent className="p-3 h-full flex flex-col justify-between">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-8 h-8 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg flex items-center justify-center mb-2">
+                    <span className="text-lg">{voucher.logo}</span>
                   </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-sm">{voucher.title}</h4>
-                    <p className="text-xs text-muted-foreground">{voucher.description}</p>
-                    <div className="flex gap-2 mt-2">
-                      <Badge variant="secondary" className="text-xs">
-                        {voucher.cost} pts
-                      </Badge>
-                      <Badge variant="outline" className="text-xs">
-                        Expires {voucher.expiry}
-                      </Badge>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <h4 className="font-semibold text-xs leading-tight mb-1">{voucher.title}</h4>
+                  <p className="text-xs text-muted-foreground leading-tight">{voucher.description}</p>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <Badge variant="secondary" className="text-xs w-full justify-center">
+                    {voucher.cost} pts
+                  </Badge>
+                  <Badge variant="outline" className="text-xs w-full justify-center">
+                    Expires {voucher.expiry}
+                  </Badge>
                 </div>
               </CardContent>
             </Card>
