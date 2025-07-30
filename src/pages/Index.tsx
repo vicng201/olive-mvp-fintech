@@ -578,7 +578,7 @@ const Index = () => {
         <div className="flex">
           {[
             { id: "home", icon: Home, label: "Home" },
-            { id: "loyalty", icon: CreditCard, label: "Loyalty" },
+            { id: "loyalty", icon: CreditCard, label: "OlivePoints" },
             { id: "wallets", icon: Wallet, label: "Wallets" },
             { id: "analytics", icon: BarChart3, label: "Analytics" },
           ].map((tab) => (
