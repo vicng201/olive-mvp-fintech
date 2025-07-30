@@ -222,17 +222,6 @@ const Index = () => {
         </Card>
 
         {/* Top 3 Wallets */}
-        <div className="flex space-x-3 overflow-x-auto pb-2 mb-4">
-          {wallets.slice(0, 3).map((wallet, index) => (
-            <Card key={index} className="min-w-[160px] cursor-pointer hover:shadow-md transition-shadow">
-              <CardContent className="p-4">
-                <div className={`w-8 h-8 rounded-lg ${wallet.color} mb-2`}></div>
-                <p className="font-medium text-sm">{wallet.name}</p>
-                <p className="text-xs text-muted-foreground">{wallet.displayBalance}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
 
         {/* Recent Transactions */}
         <Card>
