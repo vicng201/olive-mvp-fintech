@@ -661,26 +661,29 @@ const Index = () => {
           </Button>
         </div>
         
-        <div className="flex gap-3 overflow-x-auto pb-2">
-          {recentPointActivities.slice(0, 3).map((activity, index) => (
-            <Card key={index} className="min-w-[280px] flex-shrink-0">
-              <CardContent className="p-4">
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <p className="font-medium text-sm">{activity.merchant}</p>
-                    <p className="text-xs text-muted-foreground">{activity.action}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{activity.date}</p>
+        <Card>
+          <CardContent className="p-4 bg-gray-50/50">
+            <h4 className="font-medium text-sm mb-3">Recent Activity</h4>
+            <div className="space-y-3">
+              {recentPointActivities.slice(0, 3).map((activity, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center">
+                      <Star className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">{activity.merchant}</p>
+                      <p className="text-xs text-muted-foreground">{activity.action} • {activity.date}</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className={`font-semibold text-sm ${activity.points > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                      {activity.points > 0 ? '+' : ''}{activity.points} pts
-                    </p>
-                  </div>
+                  <p className={`font-medium text-sm ${activity.points > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    {activity.points > 0 ? '+' : ''}{activity.points} pts
+                  </p>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Current Vouchers */}
