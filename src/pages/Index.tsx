@@ -328,7 +328,7 @@ const Index = () => {
     <div className="space-y-6">
       {/* Headline */}
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-foreground">Scan Loyalty Card To Earn Points!</h2>
+        <h2 className="text-lg font-bold text-foreground">Scan Loyalty Card To Earn Points!</h2>
       </div>
 
       {/* Redeem Rewards Section */}
