@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/components/ui/use-toast";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ComposedChart, Bar } from "recharts";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Home, 
   CreditCard, 
@@ -120,6 +121,50 @@ const Index = () => {
       walletName: "Sacombank", 
       walletColor: "bg-teal-500" 
     }
+  ];
+
+  // Mock data for Points Analytics Tab
+  const pointsHistory = [
+    { date: "Mon", earned: 120, redeemed: 80, cashout: 50 },
+    { date: "Tue", earned: 150, redeemed: 60, cashout: 30 },
+    { date: "Wed", earned: 200, redeemed: 100, cashout: 70 },
+    { date: "Thu", earned: 180, redeemed: 90, cashout: 40 },
+    { date: "Fri", earned: 220, redeemed: 110, cashout: 80 },
+    { date: "Sat", earned: 160, redeemed: 70, cashout: 60 },
+    { date: "Sun", earned: 140, redeemed: 85, cashout: 45 },
+  ];
+
+  const recentPointActivities = [
+    { merchant: "Circle K", action: "Purchase scan", points: 25, date: "2 hours ago" },
+    { merchant: "Lotte Mart", action: "Weekly bonus", points: 100, date: "1 day ago" },
+    { merchant: "Highlands Coffee", action: "Purchase scan", points: 15, date: "2 days ago" },
+    { merchant: "Voucher Redemption", action: "Coffee voucher used", points: -150, date: "3 days ago" },
+    { merchant: "7-Eleven", action: "Purchase scan", points: 20, date: "4 days ago" },
+    { merchant: "Cash Out", action: "Bank transfer", points: -500, date: "5 days ago" },
+  ];
+
+  const activeVouchers = [
+    {
+      title: "Free Coffee",
+      description: "Any size coffee at participating stores",
+      cost: "150",
+      expiry: "Dec 15",
+      logo: "☕"
+    },
+    {
+      title: "20% Off Groceries",
+      description: "Maximum discount 100,000 VND",
+      cost: "300",
+      expiry: "Dec 20",
+      logo: "🛒"
+    },
+    {
+      title: "Free Delivery",
+      description: "Food delivery from partner restaurants",
+      cost: "100",
+      expiry: "Dec 25",
+      logo: "🚚"
+    },
   ];
 
   const toggleCardFlip = (index: number) => {
@@ -534,22 +579,147 @@ const Index = () => {
 
   const renderAnalyticsTab = () => (
     <div className="space-y-6">
-      <Card>
-        <CardContent className="p-6 text-center">
-          <div className="space-y-4">
-            <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto">
-              <BarChart3 className="w-8 h-8 text-muted-foreground" />
-            </div>
+      {/* Extended Hero Card with KPIs and Chart */}
+      <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
+        <CardContent className="p-6 space-y-6">
+          {/* Points Balance */}
+          <div className="flex justify-between items-start">
             <div>
-              <h3 className="text-lg font-semibold mb-2">Coming Soon</h3>
-              <p className="text-sm text-muted-foreground">More analytics features are being developed. For now, you can access total wealth and recent transaction in the Wallet tab.</p>
+              <p className="text-blue-100 text-sm">Total Balance</p>
+              <h2 className="text-3xl font-bold">5,489 pts</h2>
+              <p className="text-blue-100 text-sm">= 54,890 VND</p>
+              <p className="text-blue-100 text-sm mt-1">+245 pts today</p>
             </div>
-            <Button onClick={() => setActiveTab("wallets")}>
-              Go to Wallets
-            </Button>
+            <div className="text-right">
+              <Badge variant="secondary" className="bg-white/20 text-white">
+                1 pt = 10 VND
+              </Badge>
+            </div>
+          </div>
+
+          {/* KPI Metrics */}
+          <div className="grid grid-cols-3 gap-4">
+            <div className="text-center">
+              <p className="text-blue-100 text-xs">Total Earned</p>
+              <p className="text-xl font-semibold">2,450</p>
+            </div>
+            <div className="text-center">
+              <p className="text-blue-100 text-xs">Total Redeemed</p>
+              <p className="text-xl font-semibold">1,200</p>
+            </div>
+            <div className="text-center">
+              <p className="text-blue-100 text-xs">Total Cash Out</p>
+              <p className="text-xl font-semibold">1,000</p>
+            </div>
+          </div>
+
+          {/* Chart Section */}
+          <div className="space-y-3">
+            <div className="flex justify-between items-center">
+              <p className="text-blue-100 text-sm">Points Activity</p>
+              <Select defaultValue="weekly">
+                <SelectTrigger className="w-20 h-8 bg-white/20 border-white/30 text-white text-xs">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="daily">D</SelectItem>
+                  <SelectItem value="weekly">W</SelectItem>
+                  <SelectItem value="monthly">M</SelectItem>
+                  <SelectItem value="quarterly">Q</SelectItem>
+                  <SelectItem value="yearly">Y</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            {/* Mini Chart */}
+            <div className="h-32">
+              <ChartContainer config={{
+                earned: { label: "Earned", color: "hsl(var(--primary))" },
+                redeemed: { label: "Redeemed", color: "hsl(var(--secondary))" },
+                cashout: { label: "Cash Out", color: "hsl(var(--accent))" }
+              }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <ComposedChart data={pointsHistory}>
+                    <Bar dataKey="earned" fill="rgba(255,255,255,0.8)" radius={2} />
+                    <Line type="monotone" dataKey="redeemed" stroke="rgba(255,255,255,0.6)" strokeWidth={2} />
+                    <Line type="monotone" dataKey="cashout" stroke="rgba(255,255,255,0.4)" strokeWidth={2} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </div>
           </div>
         </CardContent>
       </Card>
+
+      {/* Recent Point Activities */}
+      <div>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold">Recent Activities</h3>
+          <Button variant="ghost" size="sm">
+            View All History
+            <ChevronRight className="w-4 h-4 ml-1" />
+          </Button>
+        </div>
+        
+        <div className="flex gap-3 overflow-x-auto pb-2">
+          {recentPointActivities.slice(0, 3).map((activity, index) => (
+            <Card key={index} className="min-w-[280px] flex-shrink-0">
+              <CardContent className="p-4">
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <p className="font-medium text-sm">{activity.merchant}</p>
+                    <p className="text-xs text-muted-foreground">{activity.action}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{activity.date}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className={`font-semibold text-sm ${activity.points > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                      {activity.points > 0 ? '+' : ''}{activity.points} pts
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Current Vouchers */}
+      <div>
+        <h3 className="text-lg font-semibold mb-4">My Vouchers</h3>
+        
+        <div className="space-y-3">
+          {activeVouchers.map((voucher, index) => (
+            <Card key={index} className="overflow-hidden bg-gradient-to-r from-gray-50 to-white border-l-4 border-l-primary">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">{voucher.logo}</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-sm">{voucher.title}</h4>
+                    <p className="text-xs text-muted-foreground">{voucher.description}</p>
+                    <div className="flex gap-2 mt-2">
+                      <Badge variant="secondary" className="text-xs">
+                        {voucher.cost} pts
+                      </Badge>
+                      <Badge variant="outline" className="text-xs">
+                        Expires {voucher.expiry}
+                      </Badge>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Expired Passes Nudge */}
+        <Button variant="ghost" className="w-full mt-4 text-muted-foreground hover:text-foreground">
+          View 50 Expired Passes
+          <ChevronRight className="w-4 h-4 ml-1" />
+        </Button>
+      </div>
     </div>
   );
 
