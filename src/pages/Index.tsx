@@ -623,16 +623,15 @@ const Index = () => {
 
   const renderAnalyticsTab = () => (
     <div className="space-y-6">
-      {/* Extended Hero Card with KPIs and Chart */}
+      {/* Hero Card with Points Balance and KPIs */}
       <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
-        <CardContent className="p-6 space-y-6">
+        <CardContent className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           {/* Points Balance */}
           <div className="flex justify-between items-start">
             <div>
               <p className="text-blue-100 text-sm">Total Balance</p>
-              <h2 className="text-3xl font-bold">5,489 pts</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold">5,489 pts</h2>
               <p className="text-blue-100 text-sm">= 54,890 VND</p>
-              
             </div>
             <div className="text-right">
               <Badge variant="secondary" className="bg-white/20 text-white">
@@ -642,27 +641,31 @@ const Index = () => {
           </div>
 
           {/* KPI Metrics */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
             <div className="text-center">
               <p className="text-blue-100 text-xs">Total Earned</p>
-              <p className="text-xl font-semibold">2,450</p>
+              <p className="text-lg sm:text-xl font-semibold">2,450</p>
             </div>
             <div className="text-center">
               <p className="text-blue-100 text-xs">Total Redeemed</p>
-              <p className="text-xl font-semibold">1,200</p>
+              <p className="text-lg sm:text-xl font-semibold">1,200</p>
             </div>
             <div className="text-center">
               <p className="text-blue-100 text-xs">Total Cash Out</p>
-              <p className="text-xl font-semibold">1,000</p>
+              <p className="text-lg sm:text-xl font-semibold">1,000</p>
             </div>
           </div>
+        </CardContent>
+      </Card>
 
-          {/* Chart Section */}
-          <div className="space-y-3">
+      {/* Points Activity Chart - Separate Container */}
+      <Card>
+        <CardContent className="p-4 sm:p-6">
+          <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <p className="text-blue-100 text-sm">Points Activity</p>
+              <h3 className="text-lg font-semibold">Points Activity</h3>
               <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-                <SelectTrigger className="w-20 h-8 bg-white/20 border-white/30 text-white text-xs">
+                <SelectTrigger className="w-16 sm:w-20 h-8 text-xs">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -675,22 +678,38 @@ const Index = () => {
               </Select>
             </div>
             
-            {/* Bar Chart */}
-            <div className="h-32">
-              <ChartContainer config={{
-                pointsIn: { label: "Points In", color: "hsl(120, 60%, 50%)" },
-                pointsOut: { label: "Points Out", color: "hsl(0, 60%, 50%)" }
-              }}>
+            {/* Bar Chart with Responsive Container */}
+            <div className="h-48 sm:h-56 md:h-64 w-full">
+              <ChartContainer 
+                config={{
+                  pointsIn: { label: "Points In", color: "hsl(120, 60%, 50%)" },
+                  pointsOut: { label: "Points Out", color: "hsl(0, 60%, 50%)" }
+                }}
+                className="w-full h-full"
+              >
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+                  <BarChart 
+                    data={chartData} 
+                    margin={{ 
+                      top: 10, 
+                      right: 10, 
+                      left: 10, 
+                      bottom: 20 
+                    }}
+                  >
                     <XAxis 
                       dataKey="date" 
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fontSize: 10, fill: 'rgba(255,255,255,0.8)' }}
-                      height={20}
+                      tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
+                      height={30}
                     />
-                    <YAxis hide />
+                    <YAxis 
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fontSize: 10, fill: 'hsl(var(--muted-foreground))' }}
+                      width={40}
+                    />
                     <ChartTooltip
                       content={<ChartTooltipContent />}
                       formatter={(value, name) => [
@@ -701,13 +720,13 @@ const Index = () => {
                     <Bar 
                       dataKey="pointsIn" 
                       fill="hsl(120, 60%, 50%)" 
-                      radius={[2, 2, 0, 0]} 
+                      radius={[3, 3, 0, 0]} 
                       name="pointsIn"
                     />
                     <Bar 
                       dataKey="pointsOut" 
                       fill="hsl(0, 60%, 50%)" 
-                      radius={[2, 2, 0, 0]} 
+                      radius={[3, 3, 0, 0]} 
                       name="pointsOut"
                     />
                   </BarChart>
