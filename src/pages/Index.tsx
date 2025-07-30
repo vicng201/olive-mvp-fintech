@@ -261,11 +261,11 @@ const Index = () => {
             <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>
-        <div className="grid grid-cols-3 gap-3">
-          {loyaltyCards.slice(0, 6).map((card, index) => (
+        <div className="flex space-x-3 overflow-x-auto pb-2">
+          {loyaltyCards.filter(card => ["Circle K", "Vinmart", "Lotte Mart"].includes(card.name)).map((card, index) => (
             <div 
               key={index} 
-              className="relative h-32 cursor-pointer"
+              className="relative h-32 min-w-[120px] cursor-pointer"
               style={{ perspective: "1000px" }}
               onClick={() => toggleCardFlip(index)}
             >
