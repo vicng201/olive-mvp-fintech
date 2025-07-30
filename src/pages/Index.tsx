@@ -321,26 +321,6 @@ const Index = () => {
         <h2 className="text-lg font-bold text-foreground">Scan Loyalty Card To Earn Points!</h2>
       </div>
 
-      {/* Redeem Rewards Section */}
-      <div>
-        <h3 className="text-lg font-semibold mb-4">Exclusive Loyalty Offer</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <Card 
-            className="cursor-pointer hover:shadow-md transition-shadow"
-            onClick={() => navigate("/vouchers")}
-          >
-            <CardContent className="p-4 text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                <Gift className="w-6 h-6 text-blue-600" />
-              </div>
-              <p className="font-medium text-sm">Vouchers</p>
-              <p className="text-xs text-muted-foreground">50+ available</p>
-            </CardContent>
-          </Card>
-          
-        </div>
-      </div>
-
       {/* Loyalty Cards Section */}
       <div>
         <div className="flex justify-between items-center mb-4">
@@ -392,6 +372,26 @@ const Index = () => {
           </CardContent>
         </Card>
         ))}
+      </div>
+
+      {/* Exclusive Loyalty Offer Section */}
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Exclusive Loyalty Offer</h3>
+        <div className="grid grid-cols-2 gap-4">
+          <Card 
+            className="cursor-pointer hover:shadow-md transition-shadow"
+            onClick={() => navigate("/vouchers")}
+          >
+            <CardContent className="p-4 text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <Gift className="w-6 h-6 text-blue-600" />
+              </div>
+              <p className="font-medium text-sm">Vouchers</p>
+              <p className="text-xs text-muted-foreground">50+ available</p>
+            </CardContent>
+          </Card>
+          
+        </div>
       </div>
     </div>
   );
