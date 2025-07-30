@@ -691,8 +691,8 @@ const Index = () => {
         
         <div className="flex gap-3 overflow-x-auto pb-2">
           {activeVouchers.map((voucher, index) => (
-            <Card key={index} className="min-w-[140px] w-[140px] h-[140px] flex-shrink-0 overflow-hidden bg-gradient-to-r from-gray-50 to-white border-l-4 border-l-primary">
-              <CardContent className="p-3 h-full flex flex-col justify-between">
+            <Card key={index} className="min-w-[140px] flex-shrink-0 overflow-hidden bg-gradient-to-r from-gray-50 to-white border-l-4 border-l-primary">
+              <CardContent className="p-3 flex flex-col gap-3">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-8 h-8 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg flex items-center justify-center mb-2">
                     <span className="text-lg">{voucher.logo}</span>
