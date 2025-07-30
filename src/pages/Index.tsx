@@ -407,11 +407,11 @@ const Index = () => {
   const renderWalletsTab = () => (
     <div className="space-y-6">
       {/* Wealth Analytics */}
-      <Card>
+      <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">Total Wealth</CardTitle>
-            <div className="flex items-center text-green-600">
+            <CardTitle className="text-lg text-white">Total Wealth</CardTitle>
+            <div className="flex items-center text-green-200">
               <TrendingUp className="w-4 h-4 mr-1" />
               <span className="text-sm font-medium">+8.2%</span>
             </div>
@@ -419,8 +419,8 @@ const Index = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <p className="text-2xl font-bold">{totalWealth.toLocaleString()} VND</p>
-            <p className="text-sm text-muted-foreground">+480,000 VND this month</p>
+            <p className="text-2xl font-bold text-white">{totalWealth.toLocaleString()} VND</p>
+            <p className="text-sm text-blue-100">+480,000 VND this month</p>
           </div>
           
           {/* Chart container with proper clipping and containment */}
