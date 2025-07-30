@@ -399,7 +399,7 @@ const Index = () => {
   const renderWalletsTab = () => (
     <div className="space-y-6">
       {/* Wealth Analytics */}
-      <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
+      <Card className="bg-gradient-to-r from-orange-500 to-pink-500 text-white border-0">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg text-white">Total Wealth</CardTitle>
