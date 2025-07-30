@@ -323,7 +323,7 @@ const Index = () => {
 
       {/* Redeem Rewards Section */}
       <div>
-        <h3 className="text-lg font-semibold mb-4">Redeem Rewards</h3>
+        <h3 className="text-lg font-semibold mb-4">Exclusive Loyalty Offer</h3>
         <div className="grid grid-cols-2 gap-4">
           <Card 
             className="cursor-pointer hover:shadow-md transition-shadow"
