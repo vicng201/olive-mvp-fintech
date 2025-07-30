@@ -356,11 +356,11 @@ const Index = () => {
             <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>
-        <div className="flex space-x-3 overflow-x-auto pb-2">
+        <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
           {loyaltyCards.filter(card => ["Circle K", "Vinmart", "Lotte Mart"].includes(card.name)).map((card, index) => (
             <div 
               key={index} 
-              className="relative h-32 min-w-[120px] cursor-pointer"
+              className="relative h-36 min-w-[160px] flex-shrink-0 cursor-pointer"
               style={{ perspective: "1000px" }}
               onClick={() => toggleCardFlip(index)}
             >
@@ -371,15 +371,15 @@ const Index = () => {
                 style={{ transformStyle: "preserve-3d" }}
               >
                 {/* Front of card */}
-                <Card className="absolute inset-0 backface-hidden border-0 shadow-md">
-                  <CardContent className="p-3 h-full flex flex-col justify-between">
-                    <div className={`w-8 h-8 rounded-lg ${card.color} flex items-center justify-center`}>
-                      <Star className="w-4 h-4 text-white" />
+                <Card className="absolute inset-0 backface-hidden border-0 shadow-lg">
+                  <CardContent className="p-4 h-full flex flex-col justify-between">
+                    <div className={`w-10 h-10 rounded-lg ${card.color} flex items-center justify-center`}>
+                      <Star className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <p className="font-medium text-xs mb-1">{card.name}</p>
-                      <p className="text-xs text-muted-foreground">{card.points} pts</p>
-                      <Badge variant="secondary" className="text-xs px-1 py-0 mt-1">
+                      <p className="font-medium text-sm mb-1">{card.name}</p>
+                      <p className="text-sm text-muted-foreground mb-2">{card.points} pts</p>
+                      <Badge variant="secondary" className="text-xs px-2 py-1">
                         {card.tier}
                       </Badge>
                     </div>
@@ -387,17 +387,17 @@ const Index = () => {
                 </Card>
                 
                 {/* Back of card */}
-                <Card className="absolute inset-0 backface-hidden rotate-y-180 border-0 shadow-md bg-gradient-to-br from-gray-50 to-gray-100">
-                  <CardContent className="p-3 h-full flex flex-col justify-between text-xs">
+                <Card className="absolute inset-0 backface-hidden rotate-y-180 border-0 shadow-lg bg-gradient-to-br from-gray-50 to-gray-100">
+                  <CardContent className="p-4 h-full flex flex-col justify-between">
                     <div>
-                      <p className="font-medium text-xs mb-2">{card.name}</p>
-                      <div className="space-y-1">
+                      <p className="font-medium text-sm mb-3">{card.name}</p>
+                      <div className="space-y-2">
                         <p className="text-xs"><span className="font-medium">Offer:</span> {card.offers}</p>
                         <p className="text-xs"><span className="font-medium">Cashback:</span> {card.cashback}</p>
                         <p className="text-xs"><span className="font-medium">Expires:</span> {card.expiry}</p>
                       </div>
                     </div>
-                    <Button size="sm" className="h-6 text-xs">
+                    <Button size="sm" className="h-8 text-xs mt-2">
                       Use Now
                     </Button>
                   </CardContent>
