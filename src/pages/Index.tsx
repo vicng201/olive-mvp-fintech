@@ -183,7 +183,7 @@ const Index = () => {
           onClick={() => navigate("/vouchers")}
         >
           <Gift className="w-6 h-6" />
-          <span className="text-sm">Redeem</span>
+          <span className="text-sm">Redeem Voucher</span>
         </Button>
         <Button 
           variant="outline" 
