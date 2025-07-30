@@ -228,7 +228,7 @@ const Index = () => {
           <CardContent className="p-4 bg-gray-50/50">
             <h4 className="font-medium text-sm mb-3">Recent Activity</h4>
             <div className="space-y-3">
-              {recentTransactions.slice(0, 5).map((transaction, index) => (
+              {recentTransactions.slice(0, 3).map((transaction, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className={`w-8 h-8 rounded-lg ${transaction.walletColor} flex items-center justify-center`}>
