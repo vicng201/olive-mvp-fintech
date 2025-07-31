@@ -356,54 +356,26 @@ const Index = () => {
             <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>
-        <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-2">
           {loyaltyCards.filter(card => ["Circle K", "Vinmart", "Lotte Mart"].includes(card.name)).map((card, index) => (
-            <div 
-              key={index} 
-              className="relative h-36 min-w-[160px] flex-shrink-0 cursor-pointer"
-              style={{ perspective: "1000px" }}
-              onClick={() => toggleCardFlip(index)}
-            >
-              <div 
-                className={`relative w-full h-full transition-transform duration-500 preserve-3d ${
-                  flippedCards.has(index) ? "rotate-y-180" : ""
-                }`}
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                {/* Front of card */}
-                <Card className="absolute inset-0 backface-hidden border-0 shadow-lg">
-                  <CardContent className="p-4 h-full flex flex-col justify-between">
-                    <div className={`w-10 h-10 rounded-lg ${card.color} flex items-center justify-center`}>
-                      <Star className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-sm mb-1">{card.name}</p>
-                      <p className="text-sm text-muted-foreground mb-2">{card.points} pts</p>
-                      <Badge variant="secondary" className="text-xs px-2 py-1">
-                        {card.tier}
-                      </Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-                
-                {/* Back of card */}
-                <Card className="absolute inset-0 backface-hidden rotate-y-180 border-0 shadow-lg bg-gradient-to-br from-gray-50 to-gray-100">
-                  <CardContent className="p-4 h-full flex flex-col justify-between">
-                    <div>
-                      <p className="font-medium text-sm mb-3">{card.name}</p>
-                      <div className="space-y-2">
-                        <p className="text-xs"><span className="font-medium">Offer:</span> {card.offers}</p>
-                        <p className="text-xs"><span className="font-medium">Cashback:</span> {card.cashback}</p>
-                        <p className="text-xs"><span className="font-medium">Expires:</span> {card.expiry}</p>
-                      </div>
-                    </div>
-                    <Button size="sm" className="h-8 text-xs mt-2">
-                      Use Now
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+            <Card key={index} className="min-w-[140px] flex-shrink-0 overflow-hidden bg-gradient-to-r from-gray-50 to-white border-l-4 border-l-primary">
+              <CardContent className="p-3 flex flex-col gap-3">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-8 h-8 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg flex items-center justify-center mb-2">
+                    <Star className="w-4 h-4 text-primary" />
+                  </div>
+                  <h4 className="font-semibold text-xs leading-tight mb-1">{card.name}</h4>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <Badge variant="secondary" className="text-xs w-full justify-center">
+                    {card.points} pts
+                  </Badge>
+                  <Badge variant="outline" className="text-xs w-full justify-center">
+                    {card.tier}
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
