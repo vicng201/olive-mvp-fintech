@@ -747,24 +747,31 @@ const Index = () => {
       <div>
         <h3 className="text-lg font-semibold mb-4">My Vouchers</h3>
         
-        <div className="flex gap-3 overflow-x-auto pb-2">
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
           {activeVouchers.map((voucher, index) => (
-            <Card key={index} className="min-w-[140px] flex-shrink-0 overflow-hidden bg-gradient-to-r from-gray-50 to-white border-l-4 border-l-primary">
-              <CardContent className="p-3 flex flex-col gap-3">
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-8 h-8 bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg flex items-center justify-center mb-2">
-                    <span className="text-lg">{voucher.logo}</span>
+            <Card key={index} className="min-w-[280px] h-[160px] flex-shrink-0 rounded-2xl shadow-lg bg-gradient-to-br from-white via-gray-50 to-gray-100 border-0 overflow-hidden hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-6 h-full flex flex-col justify-between">
+                <div className="flex justify-between items-start">
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-base mb-1 text-foreground">{voucher.title}</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{voucher.description}</p>
                   </div>
-                  <h4 className="font-semibold text-xs leading-tight mb-1">{voucher.title}</h4>
-                  <p className="text-xs text-muted-foreground leading-tight">{voucher.description}</p>
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl flex items-center justify-center ml-4 flex-shrink-0">
+                    <span className="text-2xl">{voucher.logo}</span>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <Badge variant="secondary" className="text-xs w-full justify-center">
-                    {voucher.cost} pts
-                  </Badge>
-                  <Badge variant="outline" className="text-xs w-full justify-center">
-                    Expires {voucher.expiry}
-                  </Badge>
+                <div className="flex justify-between items-center">
+                  <div className="flex gap-2">
+                    <Badge variant="secondary" className="text-xs bg-primary/10 text-primary border-0">
+                      {voucher.cost} pts
+                    </Badge>
+                    <Badge variant="outline" className="text-xs border-muted-foreground/20">
+                      Expires {voucher.expiry}
+                    </Badge>
+                  </div>
+                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                    <ChevronRight className="w-4 h-4 text-primary" />
+                  </div>
                 </div>
               </CardContent>
             </Card>
