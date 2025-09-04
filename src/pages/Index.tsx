@@ -745,7 +745,7 @@ const Index = () => {
 
       {/* Current Vouchers */}
       <div>
-        <h3 className="text-lg font-semibold mb-4">My Vouchers</h3>
+        <h3 className="text-lg font-semibold mb-4 text-pink-600">My Vouchers</h3>
         
         <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
           {activeVouchers.map((voucher, index) => (
